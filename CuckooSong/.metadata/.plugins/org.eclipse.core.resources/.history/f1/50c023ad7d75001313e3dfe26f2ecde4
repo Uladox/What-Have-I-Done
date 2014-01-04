@@ -1,0 +1,91 @@
+package Main;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import Engine.Game;
+import Engine.GameInheritedClass;
+
+
+
+
+
+
+public class GameWindow extends JFrame {
+	
+	
+
+
+
+	public GameWindow() {
+		
+		boolean running = true;
+        Game game = new Game("Cuckoo", 300, 200, 135, 193, 64, 20, 135, 195, 256, "/textures/sheets/spritesheet.png", true, "/levels/Forest.png");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle(game.fullname);
+        add(game);
+        
+        pack();
+        this.setLocationRelativeTo( getRootPane());
+        setVisible(true);
+        setResizable(false);
+        game.start();
+       while(running){
+        this.setTitle(GameInheritedClass.Title);}
+       
+       while(true){
+    	   renderTalking();
+       }
+    }
+	
+	public void renderTalking(){
+		BufferStrategy bs = getBufferStrategy();
+        if (bs == null) {
+                createBufferStrategy(3);
+                return;
+        }
+        
+        Graphics g = bs.getDrawGraphics();
+        // g.setColor(Color.BLACK);
+        // g.fillRect(0, 0, getWidth(), getHeight());
+        g.drawImage(getImage("/textures/sheets/Start.png"), 0, 0, getWidth(), getHeight(), null);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Verdana", 0, 50));
+        //g.fillRect(Mouse.getX(), Mouse.getY(), 64, 64);
+       // g.drawString("" + Mouse.getB(), 80, 80);
+         g.drawString("X: "  + " Y: " , 10, 10);
+        g.dispose();
+        bs.show();
+	}
+	
+
+	private BufferedImage getImage(String filename) {
+		// This time, you can use an InputStream to load
+		try {
+			// Grab the InputStream for the image.
+			InputStream in = getClass().getResourceAsStream(filename);
+			
+			// Then read it in.
+			return ImageIO.read(in);
+		} catch (IOException e) {
+			System.out.println("The image was not loaded.");
+			System.exit(1);
+		}
+		return null;
+	}
+	
+	public void close() throws InterruptedException{
+	
+		this.dispose();
+	}
+	
+
+	
+}

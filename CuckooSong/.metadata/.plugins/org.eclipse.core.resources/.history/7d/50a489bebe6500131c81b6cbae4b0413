@@ -1,0 +1,32 @@
+package Engine;
+
+
+public class SpawnTreeTile extends Tile {
+	//public TileEntity  tileEntity;
+	
+	public int posx, posy;
+	public SpawnTreeTile(Sprite sprite) {
+		super(sprite);
+	}
+	
+	public void render(int x, int y, Screen screen) {
+		screen.renderTile(x << 4, y << 4, this);
+		
+	}
+	public int returnxy(int x, int y){
+		posx = x;
+		posy = y;
+		return posx & posy;
+	}
+
+	public boolean front() {
+		if(Player.playerx == posx){
+		return true;}
+		else if(Player.playerx != posx){
+			return false;}
+		return true;
+		}
+	}
+	
+	
+

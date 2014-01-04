@@ -1,0 +1,12 @@
+package Engine;
+
+
+public class GameInheritedClass {
+	public static String Title = "Loading...";
+	
+	public static String UpdatedTitle(String name){
+		Title = name;
+		return Title;
+	}
+
+}
